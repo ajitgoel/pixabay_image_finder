@@ -1,4 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application searches for safe images using the Pixabay api The application is developed in ReactJs, Material UI. 
 
 ## Available Scripts
 
