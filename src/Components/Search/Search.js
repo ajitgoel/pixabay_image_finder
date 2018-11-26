@@ -25,30 +25,38 @@ class Search extends Component
         apiKey:'10776017-b594a1346eca93d97742e1656',
         images:[],
     };
+
+    QueryPixaBay=()=>
+    {
+        let searchTextTemp=this.state.searchText;
+        if(searchTextTemp==='')
+        {
+            this.setState({images:[]});
+        }
+        else
+        {
+            let url=`${this.state.apiURL}/?key=${this.state.apiKey}&q=${this.state.searchText}&image_type=photo&per_page=${this.state.amount}&safesearch=${this.state.safeSearch}`;
+            console.log(url);
+            axios.get(url)
+            .then(res=> this.setState({images:res.data.hits}))
+            .catch(err=>console.log(err));
+        }
+    }
+
     onTextChange=(e)=>
     {
         let searchTextTemp=e.target.value;
-        this.setState({searchText:searchTextTemp}, ()=> 
-        {
-            if(searchTextTemp==='')
-            {
-                this.setState({images:[]});
-            }
-            else
-            {
-                let url=`${this.state.apiURL}/?key=${this.state.apiKey}&q=${this.state.searchText}&image_type=photo&per_page=${this.state.amount}&safesearch=${this.state.safeSearch}`;
-                console.log(url);
-                axios.get(url)
-                .then(res=> this.setState({images:res.data.hits}))
-                .catch(err=>console.log(err));
-            }
-        });
+        this.setState({searchText:searchTextTemp}, ()=> this.QueryPixaBay());
     }
-    onAmountChange=(e, index, value)=>this.setState({amount:value});  
+    onAmountChange=(e, index, value)=>
+    {
+        this.setState({amount:value}, ()=> this.QueryPixaBay());
+    }
+
     OnSafeSearch =(e, isInputChecked)=>
     {
         console.log(isInputChecked);
-        this.setState({safeSearch:isInputChecked});  
+        this.setState({safeSearch:isInputChecked}, ()=> this.QueryPixaBay());
     }
 
     render() {
