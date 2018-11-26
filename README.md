@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 This application searches for safe images using the Pixabay api(https://pixabay.com/api/docs/). The application is developed in ReactJs, Material UI(https://v0.material-ui.com/#/components/toggle). 
+Commands used to deploy application:
+a. Firebase init
+b. npm run-script build
+c. firebase deploy
 
 ## Available Scripts
 
